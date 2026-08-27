@@ -407,9 +407,15 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .logo-track{display:flex;gap:1rem;width:max-content;animation:rail 34s linear infinite}
 .logo-rail:hover .logo-track{animation-play-state:paused}
 @keyframes rail{to{transform:translateX(-50%)}}
-.int-chip{flex:none;height:66px;min-width:152px;display:grid;place-items:center;padding:0 1.15rem;border-radius:14px;
-  background:rgba(255,255,255,.95);border:1px solid var(--line);box-shadow:0 0 24px -14px var(--glow);transition:transform .25s ease}
-.int-chip:hover{transform:translateY(-4px)}
+.int-chip{flex:none;height:66px;min-width:152px;display:grid;place-items:center;padding:0 1.15rem;
+  color:var(--fg-2);opacity:.72;transition:opacity .25s ease,transform .25s ease}
+.int-chip:hover{opacity:1;transform:translateY(-3px)}
+/* The marks come in their own brand colours, several of them dark blue,
+   which would vanish on this background. Rendered monochrome instead, so
+   every one reads at the same weight. */
+.int-chip svg [fill]{fill:currentColor}
+.int-chip svg [stroke]{stroke:currentColor}
+.int-chip svg text{fill:currentColor}
 .int-chip img,.int-chip svg{height:28px;width:auto;max-width:118px;object-fit:contain;display:block}
 
 /* ===== stat cards ===== */
@@ -528,6 +534,19 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
    above it were centred */
 #industries>.wrap>.small{text-align:center;max-width:78ch;margin-left:auto;margin-right:auto}
 
+
+/* ===== section headings on one line ===== */
+/* The heading block was capped at 66ch, which forced long H2s onto two lines.
+   The cap now applies to the supporting copy only, and the heading itself is
+   held to a single line on desktop. It still wraps below 1100px, where a
+   forced single line would overflow. */
+.section-head{max-width:none}
+.section-head .lede{max-width:66ch}
+@media (min-width:1100px){
+  /* only the full-width section headings. The O'Leary heading sits in a half
+     width column beside the photo, so it must stay free to wrap. */
+  .section-head h2{white-space:nowrap;font-size:clamp(1.9rem,3.1vw,2.85rem)}
+}
 
 .ribbon{position:relative;z-index:90;background:linear-gradient(96deg,var(--cy-2),var(--cy) 50%,var(--vi));color:#02222B;text-align:center;padding:.6rem 1rem;font:700 .75rem/1.4 var(--sans);letter-spacing:.03em}
 </style>
