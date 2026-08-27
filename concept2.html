@@ -614,6 +614,28 @@ html.js-anim [data-rv].rv-in{opacity:1;transform:none;
   html.js-anim [data-rv]{transform:none}
   html.js-anim [data-rv].rv-in{transition:opacity .3s ease;transform:none}
 }
+
+/* ---------- motion variants ---------- */
+/* the base state is set by the reveal module; these change the direction */
+html.js-anim [data-rv][data-dir="left"]{transform:translateX(-38px)}
+html.js-anim [data-rv][data-dir="right"]{transform:translateX(38px)}
+html.js-anim [data-rv][data-dir="zoom"]{transform:scale(.94)}
+html.js-anim [data-rv][data-dir="drop"]{transform:translateY(-26px)}
+html.js-anim [data-rv][data-dir].rv-in{transform:none}
+
+/* list items settle in behind their panel */
+html.js-anim [data-rvi]{opacity:0;transform:translateY(12px)}
+html.js-anim [data-rvi].rv-in{opacity:1;transform:none;
+  transition:opacity .44s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
+
+/* a figure that is still counting sits in tabular digits so it cannot reflow */
+.counting{font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){
+  html.js-anim [data-rv][data-dir]{transform:none}
+  html.js-anim [data-rvi]{transform:none}
+  html.js-anim [data-rvi].rv-in{transition:opacity .3s ease}
+}
 </style>
 <script>document.documentElement.classList.add("js-anim");</script>
 </head>
@@ -1215,6 +1237,121 @@ html.js-anim [data-rv].rv-in{opacity:1;transform:none;
      or not, because copy that never appears is the one unacceptable outcome. */
   setTimeout(function(){
     document.querySelectorAll("[data-rv]:not(.rv-in)").forEach(reveal);
+    clearInterval(poll);
+  }, 20000);
+})();
+
+
+(function(){
+  var root = document.documentElement;
+  if (!root.classList.contains("js-anim")) return;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* ---- direction: what arrives, and from where ---- */
+  function dir(sel, d){
+    document.querySelectorAll(sel).forEach(function(el, i){
+      if (!el.hasAttribute("data-rv")) return;
+      el.setAttribute("data-dir", typeof d === "function" ? d(i) : d);
+    });
+  }
+  dir(".st", function(i){ return i % 2 ? "right" : "left" });
+  dir(".sr", "left");
+  dir(".mo, .pr, .steps > div", "drop");
+  dir(".proof-shot, .band-shot, .ind-panel, .folk", "zoom");
+  dir(".head", "drop");
+  dir(".posts > *, .bar > *", function(i){ return i % 2 ? "right" : "left" });
+
+  /* ---- depth: list items settle in behind their panel ---- */
+  var LISTS = ".st-caps, .ind-list, .ba ul, .vs ul, .feed, .foot ul";
+  document.querySelectorAll(LISTS).forEach(function(list){
+    [].slice.call(list.children).forEach(function(li, i){
+      li.setAttribute("data-rvi", "");
+      li.style.transitionDelay = (120 + Math.min(i, 7) * 55) + "ms";
+    });
+  });
+
+  /* ---- counting: every figure counts up to its own value ---- */
+  var FIGS = ".bar b, .stat .fig b, .readout-foot b, .rail b, .mo .amt";
+  var counters = [];
+  document.querySelectorAll(FIGS).forEach(function(el){
+    var full = el.textContent;
+    /* the first run of digits, with whatever wraps it left and right */
+    var m = full.match(/^(\D*)([\d][\d,\.]*)(.*)$/);
+    if (!m) return;
+    var target = parseFloat(m[2].replace(/,/g, ""));
+    if (!isFinite(target) || target <= 0) return;
+    var decimals = (m[2].split(".")[1] || "").length;
+    var grouped = m[2].indexOf(",") > -1;
+    counters.push({ el: el, full: full, pre: m[1], post: m[3],
+                    target: target, decimals: decimals, grouped: grouped, done: false });
+  });
+
+  function fmt(v, c){
+    var s = v.toFixed(c.decimals);
+    if (c.grouped) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return c.pre + s + c.post;
+  }
+
+  function count(c){
+    if (c.done) return;
+    c.done = true;
+    if (reduce.matches) return;            /* leave the value as authored */
+    var DUR = 1100, t0 = null;
+    c.el.classList.add("counting");
+    function step(now){
+      if (t0 === null) t0 = now;
+      var p = Math.min((now - t0) / DUR, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      c.el.textContent = fmt(c.target * eased, c);
+      if (p < 1) requestAnimationFrame(step);
+      else { c.el.textContent = c.full; c.el.classList.remove("counting") }
+    }
+    requestAnimationFrame(step);
+    /* whatever happens above, the authored string is back within two seconds */
+    setTimeout(function(){
+      if (c.el.textContent !== c.full) c.el.textContent = c.full;
+      c.el.classList.remove("counting");
+    }, 2000);
+  }
+
+  /* ---- run them: the same three drivers the reveals use ---- */
+  function inView(el){
+    var r = el.getBoundingClientRect();
+    return r.top < (window.innerHeight || 0) * 0.9 && r.bottom > 0;
+  }
+  function sweep(){
+    var pending = 0;
+    document.querySelectorAll("[data-rvi]:not(.rv-in)").forEach(function(el){
+      if (inView(el)) el.classList.add("rv-in"); else pending++;
+    });
+    counters.forEach(function(c){ if (!c.done && inView(c.el)) count(c); else if (!c.done) pending++ });
+    return pending;
+  }
+
+  sweep();
+
+  var lastRun = 0;
+  function onScroll(){
+    var now = Date.now();
+    if (now - lastRun < 80) return;
+    lastRun = now;
+    sweep();
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  var poll = setInterval(function(){
+    if (sweep() === 0) {
+      clearInterval(poll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    }
+  }, 250);
+
+  /* hard stop: show every list item and settle every figure */
+  setTimeout(function(){
+    document.querySelectorAll("[data-rvi]:not(.rv-in)").forEach(function(el){ el.classList.add("rv-in") });
+    counters.forEach(function(c){ c.done = true; c.el.textContent = c.full });
     clearInterval(poll);
   }, 20000);
 })();
