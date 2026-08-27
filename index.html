@@ -84,8 +84,12 @@ section:last-of-type{padding-bottom:clamp(46px,5.6vw,84px)}
   transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s ease,border-color .22s ease,color .22s ease}
 .btn-primary{background:linear-gradient(96deg,var(--cy-2),var(--cy) 42%,#4FB8F0);color:#02222B;
   box-shadow:0 0 26px -8px var(--glow),0 14px 36px -18px var(--glow),inset 0 1px 0 rgba(255,255,255,.55)}
-.btn-primary:hover{background:linear-gradient(96deg,#C7F4FF,#7FE3FA 42%,#8FD8FF);color:#01161C;
-  transform:translateY(-2px);box-shadow:0 0 40px -6px var(--glow),0 18px 44px -18px var(--glow)}
+/* The primary CTA inverts on hover: the light fill drops away and the
+   button becomes dark with cyan type, so the change is unmistakable
+   rather than a slight brightening. */
+.btn-primary:hover{background:#07303F;color:var(--cy-2);border-color:var(--cy);
+  transform:translateY(-2px);box-shadow:0 0 34px -8px var(--glow),inset 0 0 0 1px var(--cy)}
+.btn-primary:hover::after{opacity:0}
 .btn-primary::after{content:"";position:absolute;top:0;left:-140%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:sweep 3.6s ease-in-out infinite}
 @keyframes sweep{0%,64%{left:-140%}100%{left:180%}}
 .btn-ghost{background:var(--glass-2);color:var(--fg);border-color:var(--line-2);backdrop-filter:blur(10px);
