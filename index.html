@@ -488,13 +488,23 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 
 /* FAQ in two columns: a six-word question filled maybe a third of a full-width
    row, so the rest read as dead space. Each column is now roughly 500px. */
-.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.1rem;align-items:start;
-  max-width:1180px;margin:0 auto}
-#faq .faq-item{max-width:none;margin:0}
-.faq-item summary{gap:.8rem}
-.faq-item summary .qcat{min-width:84px}
-.faq-item .ans{padding-left:clamp(16px,2vw,22px)}
-@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
+.faq-grid{max-width:1180px;margin:0 auto}
+#faq .faq-item{max-width:none;margin:0 0 .7rem}
+.faq-item summary{gap:1rem}
+.faq-item summary .qcat{min-width:96px}
+.faq-item summary .qtext{flex:1}
+.faq-item .ans{padding-left:calc(clamp(16px,2vw,22px) + 96px + 1rem)}
+@media (max-width:760px){.faq-item .ans{padding-left:clamp(16px,2vw,22px)}}
+
+/* Call button: the phone number was a text link three times over. It is a
+   primary action, so it now looks like one, without competing with the
+   book-a-call gradient. */
+.btn-call{background:rgba(19,62,82,.9);color:#9FEDFF;border-color:var(--line-2);
+  box-shadow:inset 0 0 22px -12px var(--glow)}
+.btn-call:hover{border-color:var(--cy);color:#EAFBFF;transform:translateY(-2px);
+  box-shadow:0 0 26px -12px var(--glow)}
+.btn-call svg{flex:none}
+
 
 .ribbon{position:relative;z-index:90;background:linear-gradient(96deg,var(--cy-2),var(--cy) 50%,var(--vi));color:#02222B;text-align:center;padding:.6rem 1rem;font:700 .75rem/1.4 var(--sans);letter-spacing:.03em}
 </style>
@@ -1971,7 +1981,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
     <div class="glass note rv" style="margin-top:2rem">
       <p style="margin:0 auto .7rem">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope. Want to know what&rsquo;s possible for your business?</p>
       <p style="margin:1.15rem auto"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
-      <p style="margin:0 auto .7rem">Or call us directly: <a href="tel:+15047174837"><strong>(504) 717-4837</strong></a></p>
+      <p style="margin:0 auto .9rem"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p>
       <p class="small" style="margin:0 auto">Sources: McKinsey Global Institute, Harvard Business Review, IBM, Gartner, Clio Legal Trends Report, BrightLocal, Invoca, Omnisend, Ardent Partners, Ponemon Institute, and others. Full citations available upon request.</p>
     </div>
   </div>
@@ -2020,7 +2030,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
       <div class="glass card rv d1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6L4 12l5 6M15 6l5 6-5 6" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p class="lab">Step 02</p><h3>Build</h3><p style="margin:0">We design and build a custom AI system that handles your specific tasks: calls, texts, emails, CRM updates, dispatching, compliance, whatever you need.</p></div>
       <div class="glass card rv d2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20V7m0 0l-4 4m4-4l4 4" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="4" r="1.6" fill="#C4B5FD"/></svg></span><p class="lab">Step 03</p><h3>Launch</h3><p style="margin:0">Your AI goes live. We monitor, optimize and support. You focus on running your business.</p></div>
     </div>
-    <div class="glass note rv d3" style="margin-top:2rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices. Or call us directly: <a href="tel:+15047174837"><strong>(504) 717-4837</strong></a></div>
+    <div class="glass note rv d3" style="margin-top:2rem"><p style="margin:0 auto 1rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices.</p><p style="margin:0 auto"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p></div>
   </div>
 </section>
 
@@ -2176,35 +2186,35 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
     </div>
       <div class="faq-grid">
 <details class="glass faq-item rv" open>
-        <summary><span class="qcat">Services</span><span class="qtext">What exactly do you build?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Services</span><span class="qtext">What exactly does FlowBots build for my business?</span><span class="chev"></span></summary>
         <div class="ans"><p>Custom AI systems designed around your specific workflows. If a human in your company does it on a keyboard or phone, we can probably automate it. Common builds: AI voice agents, SMS follow-up systems, CRM automation, compliance workflows, dispatching, payroll processing, and multi-channel communication systems.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Pricing</span><span class="qtext">How much does it cost?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Pricing</span><span class="qtext">How much does a custom AI automation project cost?</span><span class="chev"></span></summary>
         <div class="ans"><p>Projects range from $15,000 to $300,000 depending on scope. Pilot projects start at $15,000. AI voice usage is billed at $0.25/minute of actual call time. We give you a fixed-price quote before any work begins, no surprises.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Timeline</span><span class="qtext">How long does it take?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Timeline</span><span class="qtext">How long does it take to build and launch AI automation?</span><span class="chev"></span></summary>
         <div class="ans"><p>Most projects take 4&ndash;8 weeks. Complex enterprise builds take 8&ndash;16 weeks. We&rsquo;ll give you a clear timeline during your discovery call.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Integrations</span><span class="qtext">What systems do you integrate with?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Integrations</span><span class="qtext">What CRM and business systems can AI automation integrate with?</span><span class="chev"></span></summary>
         <div class="ans"><p>30+ platforms including ServiceTitan, Salesforce, HubSpot, GoHighLevel, Dentrix, Mindbody, Boulevard, Clio, and more. If your system has an API, we can connect to it. Custom integrations are included in project scope.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Security</span><span class="qtext">Is this HIPAA compliant?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Security</span><span class="qtext">Is AI automation HIPAA compliant for healthcare and dental practices?</span><span class="chev"></span></summary>
         <div class="ans"><p>Yes. We maintain Business Associate Agreements with all AI providers, enforce HIPAA protocols, and hold SOC 2 Type II certification with annual independent security audits.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">General</span><span class="qtext">Will AI replace my employees?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">General</span><span class="qtext">Will AI automation replace my employees or my existing team?</span><span class="chev"></span></summary>
         <div class="ans"><p>No. AI handles the repetitive tasks your team shouldn&rsquo;t be doing, answering phones, entering data, sending follow-ups. Your team focuses on complex problem-solving, relationship building, and strategic work that requires a human.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Guarantee</span><span class="qtext">What if it doesn&rsquo;t work?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Guarantee</span><span class="qtext">What happens if the AI automation doesn&rsquo;t work for my business?</span><span class="chev"></span></summary>
         <div class="ans"><p>Every project starts with a fixed-price proposal. You know exactly what you&rsquo;re paying before any work begins. No surprise invoices, no scope creep charges. And your data and workflows are always yours, the code, the automations, the integrations. It&rsquo;s yours.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Getting Started</span><span class="qtext">How do I get started?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Getting Started</span><span class="qtext">How do I get started with custom AI automation?</span><span class="chev"></span></summary>
         <div class="ans"><p>Book a free discovery call. We&rsquo;ll spend 30 minutes mapping your current workflows, identifying automation opportunities, and showing you exactly what&rsquo;s possible. No pressure. No sales pitch.</p></div>
       </details>
       </div>
@@ -2218,7 +2228,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
     <p class="lede rv d2">We&rsquo;ll map your manual workflows and show you exactly what can be automated, with projected ROI numbers.</p>
     <div class="rv d3" style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
       <a class="btn btn-primary" href="#">Claim Your Free Assessment</a>
-      <a class="btn btn-ghost" href="tel:+15047174837">Or Call (504) 717-4837</a>
+      <a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a>
     </div>
     <p class="small rv d4" style="margin-top:1.5rem">30-minute call. We&rsquo;ll show you your top 3 automation opportunities. No pressure. No sales pitch.</p>
   </div>
