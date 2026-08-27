@@ -473,10 +473,15 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 #faq .faq-item{max-width:1040px;margin-left:auto;margin-right:auto}
 /* The note box left ~1,100px of empty width beside its CTA. Centre it and
    hold the prose to a readable measure instead of stretching it. */
-.note{text-align:center}
-.note{max-width:1040px;margin-left:auto;margin-right:auto}
+.note{max-width:1040px;margin-left:auto;margin-right:auto;text-align:center}
 .note>*{max-width:740px;margin-left:auto;margin-right:auto}
 .note .btn{margin-left:auto;margin-right:auto}
+/* A note that is prose rather than a CTA reads left, flush with its padding,
+   and every paragraph shares one edge. */
+.note-prose{text-align:left}
+.note-prose>*{max-width:78ch;margin-left:0;margin-right:0}
+.note-prose>*+*{margin-top:.7rem}
+.note-prose p{margin-bottom:0}
 /* Beth asked for the CTAs centred. */
 .ind-panel>p:last-child{justify-content:center}
 #build>.wrap>p:last-of-type,#insights>.wrap>p:last-of-type{text-align:center}
@@ -2165,10 +2170,10 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
       <div class="glass card rv d1"><h3>Your Data Stays Yours</h3><p style="margin:0">The code, the automations, the integrations, it&rsquo;s all yours. We don&rsquo;t hold your business hostage on our platform.</p></div>
       <div class="glass card rv d2"><h3>No Long-Term Contracts</h3><p style="margin:0">Stay because the results speak for themselves, not because you&rsquo;re locked in. Month-to-month support after launch.</p></div>
     </div>
-    <div class="glass note rv d3" style="margin-top:1.75rem">
-      <p style="font-weight:700;color:var(--fg);margin-bottom:.5rem">What We Don&rsquo;t Automate</p>
-      <p style="margin-bottom:.5rem">We automate tasks done on keyboards and phones, the repetitive work that drains your team&rsquo;s time. We don&rsquo;t replace human judgment, creativity, relationship-building, or the expertise that makes your business unique. AI handles the busywork. Your team handles the work that matters.</p>
-      <p style="margin:0">Your people get better at their jobs when they stop doing work a machine should handle.</p>
+    <div class="glass note note-prose rv d3" style="margin-top:1.75rem">
+      <h3 style="font-size:1.0625rem;margin-bottom:.6rem">What We Don&rsquo;t Automate</h3>
+      <p>We automate tasks done on keyboards and phones, the repetitive work that drains your team&rsquo;s time. We don&rsquo;t replace human judgment, creativity, relationship-building, or the expertise that makes your business unique. AI handles the busywork. Your team handles the work that matters.</p>
+      <p>Your people get better at their jobs when they stop doing work a machine should handle.</p>
     </div>
   </div>
 </section>
