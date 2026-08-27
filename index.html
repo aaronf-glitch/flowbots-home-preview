@@ -233,12 +233,12 @@ section:last-of-type{padding-bottom:clamp(46px,5.6vw,84px)}
 
 /* ===== pipeline ===== */
 .pipe{padding:clamp(22px,3vw,34px);overflow:hidden}
-.pipe-track{display:flex;align-items:center;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+.pipe-track{display:flex;align-items:center;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none;justify-content:space-between}
 .pipe-track::-webkit-scrollbar{display:none}
 .node{flex:none;min-width:138px;text-align:center;padding:.95rem .85rem;border:1px solid var(--line-2);border-radius:13px;background:var(--glass-3);backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
 .node b{display:block;font-family:var(--disp);font-size:.9375rem;font-weight:700;margin-bottom:.2rem}
 .node span{font-family:var(--mono);font-size:.5625rem;letter-spacing:.1em;color:var(--fg-3);text-transform:uppercase}
-.link{flex:none;width:clamp(32px,5vw,62px);height:2px;background:var(--line-2);position:relative}
+.link{flex:1 1 auto;min-width:34px;height:2px;background:var(--line-2);position:relative}
 .link::after{content:"";position:absolute;top:-2px;left:0;width:6px;height:6px;border-radius:50%;background:var(--cy-2);box-shadow:0 0 14px 3px var(--glow);animation:travel 2.4s linear infinite}
 .link:nth-of-type(4)::after{animation-delay:.6s}.link:nth-of-type(6)::after{animation-delay:1.2s}.link:nth-of-type(8)::after{animation-delay:1.8s}
 @keyframes travel{to{left:100%}}
@@ -474,7 +474,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 /* The note box left ~1,100px of empty width beside its CTA. Centre it and
    hold the prose to a readable measure instead of stretching it. */
 .note{text-align:center}
-.note>*{max-width:78ch;margin-left:auto;margin-right:auto}
+.note{max-width:1040px;margin-left:auto;margin-right:auto}
+.note>*{max-width:740px;margin-left:auto;margin-right:auto}
 .note .btn{margin-left:auto;margin-right:auto}
 /* Beth asked for the CTAs centred. */
 .ind-panel>p:last-child{justify-content:center}
@@ -484,6 +485,16 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .btn-ghost{backdrop-filter:none;background:rgba(19,62,82,.82)}
 .ind-panel>p:last-child{gap:1.25rem}
 
+
+/* FAQ in two columns: a six-word question filled maybe a third of a full-width
+   row, so the rest read as dead space. Each column is now roughly 500px. */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.1rem;align-items:start;
+  max-width:1180px;margin:0 auto}
+#faq .faq-item{max-width:none;margin:0}
+.faq-item summary{gap:.8rem}
+.faq-item summary .qcat{min-width:84px}
+.faq-item .ans{padding-left:clamp(16px,2vw,22px)}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
 
 .ribbon{position:relative;z-index:90;background:linear-gradient(96deg,var(--cy-2),var(--cy) 50%,var(--vi));color:#02222B;text-align:center;padding:.6rem 1rem;font:700 .75rem/1.4 var(--sans);letter-spacing:.03em}
 </style>
@@ -1958,10 +1969,10 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
     </div>
 
     <div class="glass note rv" style="margin-top:2rem">
-      <p style="margin-bottom:.7rem">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope. Want to know what&rsquo;s possible for your business?</p>
+      <p style="margin:0 auto .7rem">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope. Want to know what&rsquo;s possible for your business?</p>
       <p style="margin:1.15rem auto"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
-      <p style="margin-bottom:.7rem">Or call us directly: <a href="tel:+15047174837"><strong>(504) 717-4837</strong></a></p>
-      <p class="small" style="margin:0">Sources: McKinsey Global Institute, Harvard Business Review, IBM, Gartner, Clio Legal Trends Report, BrightLocal, Invoca, Omnisend, Ardent Partners, Ponemon Institute, and others. Full citations available upon request.</p>
+      <p style="margin:0 auto .7rem">Or call us directly: <a href="tel:+15047174837"><strong>(504) 717-4837</strong></a></p>
+      <p class="small" style="margin:0 auto">Sources: McKinsey Global Institute, Harvard Business Review, IBM, Gartner, Clio Legal Trends Report, BrightLocal, Invoca, Omnisend, Ardent Partners, Ponemon Institute, and others. Full citations available upon request.</p>
     </div>
   </div>
 </section>
@@ -2163,7 +2174,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
       <h2 class="rv d1"><span class="grad">Everything</span> You Need to Know</h2>
       <p class="lede rv d2" style="margin-top:1.1rem">Straight answers. No fluff.</p>
     </div>
-      <details class="glass faq-item rv" open>
+      <div class="faq-grid">
+<details class="glass faq-item rv" open>
         <summary><span class="qcat">Services</span><span class="qtext">What exactly do you build?</span><span class="chev"></span></summary>
         <div class="ans"><p>Custom AI systems designed around your specific workflows. If a human in your company does it on a keyboard or phone, we can probably automate it. Common builds: AI voice agents, SMS follow-up systems, CRM automation, compliance workflows, dispatching, payroll processing, and multi-channel communication systems.</p></div>
       </details>
@@ -2195,6 +2207,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
         <summary><span class="qcat">Getting Started</span><span class="qtext">How do I get started?</span><span class="chev"></span></summary>
         <div class="ans"><p>Book a free discovery call. We&rsquo;ll spend 30 minutes mapping your current workflows, identifying automation opportunities, and showing you exactly what&rsquo;s possible. No pressure. No sales pitch.</p></div>
       </details>
+      </div>
   </div>
 </section>
 <!-- FINAL -->
