@@ -84,12 +84,14 @@ section:last-of-type{padding-bottom:clamp(46px,5.6vw,84px)}
   transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s ease,border-color .22s ease,color .22s ease}
 .btn-primary{background:linear-gradient(96deg,var(--cy-2),var(--cy) 42%,#4FB8F0);color:#02222B;
   box-shadow:0 0 26px -8px var(--glow),0 14px 36px -18px var(--glow),inset 0 1px 0 rgba(255,255,255,.55)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px -6px var(--glow),0 18px 44px -18px var(--glow)}
+.btn-primary:hover{background:linear-gradient(96deg,#C7F4FF,#7FE3FA 42%,#8FD8FF);color:#01161C;
+  transform:translateY(-2px);box-shadow:0 0 40px -6px var(--glow),0 18px 44px -18px var(--glow)}
 .btn-primary::after{content:"";position:absolute;top:0;left:-140%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:sweep 3.6s ease-in-out infinite}
 @keyframes sweep{0%,64%{left:-140%}100%{left:180%}}
 .btn-ghost{background:var(--glass-2);color:var(--fg);border-color:var(--line-2);backdrop-filter:blur(10px);
   box-shadow:inset 0 0 22px -12px var(--glow)}
-.btn-ghost:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-2px);box-shadow:0 0 26px -12px var(--glow)}
+.btn-ghost:hover{background:var(--cy);border-color:var(--cy);color:#02222B;
+  transform:translateY(-2px);box-shadow:0 0 26px -8px var(--glow)}
 .btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
 
 /* ===== header ===== */
@@ -408,14 +410,12 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .logo-rail:hover .logo-track{animation-play-state:paused}
 @keyframes rail{to{transform:translateX(-50%)}}
 .int-chip{flex:none;height:66px;min-width:152px;display:grid;place-items:center;padding:0 1.15rem;
-  color:var(--fg-2);opacity:.72;transition:opacity .25s ease,transform .25s ease}
-.int-chip:hover{opacity:1;transform:translateY(-3px)}
-/* The marks come in their own brand colours, several of them dark blue,
-   which would vanish on this background. Rendered monochrome instead, so
-   every one reads at the same weight. */
-.int-chip svg [fill]{fill:currentColor}
-.int-chip svg [stroke]{stroke:currentColor}
-.int-chip svg text{fill:currentColor}
+  border-radius:12px;background:rgba(226,240,248,.10);opacity:.94;
+  transition:background .25s ease,opacity .25s ease,transform .25s ease}
+.int-chip:hover{background:rgba(226,240,248,.17);opacity:1;transform:translateY(-3px)}
+/* Brand colours as published. Four elements sit under 3:1 on this ground
+   (ServiceTitan's navy, GoHighLevel's grey, Dentrix blue, Google Calendar's
+   grey), so the marks carry a faint lift behind them rather than a white card. */
 .int-chip img,.int-chip svg{height:28px;width:auto;max-width:118px;object-fit:contain;display:block}
 
 /* ===== stat cards ===== */
@@ -515,7 +515,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
    book-a-call gradient. */
 .btn-call{background:rgba(19,62,82,.9);color:#CDF6FF;border-color:var(--line-2);
   box-shadow:inset 0 0 22px -12px var(--glow)}
-.btn-call:hover{border-color:var(--cy);color:#EAFBFF;transform:translateY(-2px);
+.btn-call:hover{background:var(--cy);border-color:var(--cy);color:#02222B;transform:translateY(-2px);
   box-shadow:0 0 26px -12px var(--glow)}
 .btn-call svg{flex:none}
 
