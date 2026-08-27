@@ -413,14 +413,13 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .logo-track{display:flex;gap:1rem;width:max-content;animation:rail 34s linear infinite}
 .logo-rail:hover .logo-track{animation-play-state:paused}
 @keyframes rail{to{transform:translateX(-50%)}}
-.int-chip{flex:none;height:66px;min-width:152px;display:grid;place-items:center;padding:0 1.15rem;
-  border-radius:12px;background:rgba(226,240,248,.10);opacity:.94;
-  transition:background .25s ease,opacity .25s ease,transform .25s ease}
-.int-chip:hover{background:rgba(226,240,248,.17);opacity:1;transform:translateY(-3px)}
+.int-chip{flex:none;height:74px;min-width:190px;display:grid;place-items:center;padding:0 1.4rem;
+  transition:opacity .25s ease,transform .25s ease}
+.int-chip:hover{transform:translateY(-3px)}
 /* Brand colours as published. Four elements sit under 3:1 on this ground
    (ServiceTitan's navy, GoHighLevel's grey, Dentrix blue, Google Calendar's
    grey), so the marks carry a faint lift behind them rather than a white card. */
-.int-chip img,.int-chip svg{height:28px;width:auto;max-width:118px;object-fit:contain;display:block}
+.int-chip img,.int-chip svg{height:42px;width:auto;max-width:172px;object-fit:contain;display:block}
 
 /* ===== stat cards ===== */
 .stat-hero{display:grid;grid-template-columns:repeat(4,1fr);border-radius:16px;overflow:hidden}
@@ -475,7 +474,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
   .faq-item summary{flex-wrap:wrap;gap:.6rem}
   .faq-item summary .qcat{min-width:0}
   .faq-item .ans{padding-left:clamp(16px,2vw,22px)}
-  .int-chip{height:58px;min-width:130px}
+  .int-chip{height:60px;min-width:150px;padding:0 1rem}
+  .int-chip img,.int-chip svg{height:34px;max-width:136px}
 }
 
 /* ===== review fixes: dead space, centred CTAs ===== */
