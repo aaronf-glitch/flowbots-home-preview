@@ -12,11 +12,11 @@
 <script>document.documentElement.className+=" js-anim";</script>
 <style>
 :root{
-  --bg:#04161F; --bg-2:#062230; --deep:#03111A;
-  --glass:rgba(10,44,60,.46); --glass-2:rgba(9,34,48,.66); --glass-3:rgba(12,54,72,.4);
-  --line:rgba(56,186,223,.16); --line-2:rgba(56,186,223,.38); --line-3:rgba(56,186,223,.6);
-  --fg:#EAFBFF; --fg-2:#B4D6E2; --fg-3:#8AAFC0;
-  --cy:#38BADF; --cy-2:#7FE3FA; --cy-dk:#1B7A96; --vi:#A78BFA; --gr:#4BE8A8; --am:#FFC978;
+  --bg:#0B2A38; --bg-2:#10394B; --deep:#08222E;
+  --glass:rgba(24,74,96,.52); --glass-2:rgba(19,62,82,.7); --glass-3:rgba(30,88,112,.44);
+  --line:rgba(56,186,223,.24); --line-2:rgba(56,186,223,.46); --line-3:rgba(56,186,223,.66);
+  --fg:#F2FCFF; --fg-2:#CBE6F0; --fg-3:#A2C6D6;
+  --cy:#38BADF; --cy-2:#9FEDFF; --cy-dk:#1B7A96; --vi:#A78BFA; --gr:#4BE8A8; --am:#FFC978;
   --glow:rgba(56,186,223,.55); --glow-soft:rgba(56,186,223,.22); --glow-vi:rgba(167,139,250,.4);
   --disp:"Chakra Petch",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
@@ -27,10 +27,10 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;
   background:
-    radial-gradient(120% 80% at 50% -10%,#0A3A4C 0%,transparent 55%),
-    radial-gradient(90% 60% at 12% 30%,rgba(56,186,223,.10),transparent 60%),
-    radial-gradient(80% 60% at 88% 62%,rgba(167,139,250,.10),transparent 62%),
-    linear-gradient(180deg,#04161F 0%,#03111A 55%,#04161F 100%);
+    radial-gradient(120% 80% at 50% -10%,#15556E 0%,transparent 58%),
+    radial-gradient(90% 60% at 12% 30%,rgba(56,186,223,.13),transparent 60%),
+    radial-gradient(80% 60% at 88% 62%,rgba(167,139,250,.12),transparent 62%),
+    linear-gradient(180deg,#0B2A38 0%,#08222E 55%,#0B2A38 100%);
   background-attachment:fixed}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -59,7 +59,7 @@ section:last-of-type{padding-bottom:clamp(46px,5.6vw,84px)}
 @keyframes flow2{0%{transform:translateY(18px) scaleY(1.06)}100%{transform:translateY(-16px) scaleY(.94)}}
 @keyframes flow3{0%{transform:translateY(-8px)}100%{transform:translateY(22px)}}
 .vignette{position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:radial-gradient(120% 90% at 50% 45%,transparent 40%,rgba(2,10,16,.72) 100%)}
+  background:radial-gradient(120% 90% at 50% 45%,transparent 40%,rgba(6,26,36,.6) 100%)}
 
 /* ===== reveal ===== */
 .js-anim .rv{opacity:0;transform:translate3d(0,26px,0);will-change:opacity,transform;backface-visibility:hidden;transition:opacity .75s cubic-bezier(.2,.7,.3,1),transform .75s cubic-bezier(.2,.7,.3,1)}
@@ -192,7 +192,7 @@ section:last-of-type{padding-bottom:clamp(46px,5.6vw,84px)}
 .turn.on{opacity:1;transform:none;transition:opacity .26s ease,transform .26s ease}
 .turn:last-child{border-bottom:0}
 .turn .who{font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;color:var(--fg-3);padding-top:.2rem}
-.turn.agent .who{color:var(--cy)}
+.turn.agent .who{color:#9FEDFF}
 .turn p{margin:0;font-size:.9375rem;color:var(--fg-2);line-height:1.5}
 .caret{display:inline-block;width:7px;height:1em;background:var(--cy);vertical-align:-2px;margin-left:2px;box-shadow:0 0 8px var(--glow);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -296,9 +296,9 @@ td.now{font-family:var(--mono);font-size:.8125rem;color:var(--gr)}
 .avatar{width:86px;height:86px;border-radius:16px;background:var(--glass-3);border:1px solid var(--line-2);color:var(--cy);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:1.5rem;overflow:hidden;box-shadow:0 0 26px -10px var(--glow)}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .founder h3{font-size:1.25rem}
-.role{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cy);margin:.3rem 0 .7rem}
+.role{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:#9FEDFF;margin:.3rem 0 .7rem}
 .founder p{font-size:.9375rem;color:var(--fg-2)}
-.more{font:700 .8125rem var(--sans);color:var(--cy);text-decoration:none}
+.more{font:700 .8125rem var(--sans);color:#9FEDFF;text-decoration:none}
 .more:hover{text-decoration:underline}
 blockquote{position:relative;margin:clamp(26px,3.5vw,44px) 0 0;padding:clamp(30px,4vw,48px) clamp(26px,3.5vw,44px) clamp(26px,3.5vw,40px) clamp(58px,7vw,96px);
   border-radius:16px;background:linear-gradient(140deg,rgba(56,186,223,.09),rgba(167,139,250,.09));border:1px solid var(--line-2);overflow:hidden}
@@ -341,7 +341,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 /* ===== posts ===== */
 .post{display:block;text-decoration:none;padding:clamp(20px,2.4vw,28px);transition:transform .32s cubic-bezier(.2,.7,.3,1),border-color .32s ease,box-shadow .32s ease}
 .post:hover{transform:translateY(-6px);border-color:var(--line-2);box-shadow:0 30px 70px -40px var(--glow)}
-.post .lab{color:var(--cy);margin-bottom:.85rem}
+.post .lab{color:#9FEDFF;margin-bottom:.85rem}
 .post h3{font-size:1.1875rem;margin-bottom:.55rem}
 .post p{font-size:.875rem;color:var(--fg-2);margin-bottom:.9rem}
 
@@ -447,7 +447,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .faq-item{margin-bottom:.7rem;overflow:hidden}
 .faq-item summary{list-style:none;cursor:pointer;padding:clamp(16px,2vw,22px);display:flex;align-items:flex-start;gap:1rem;font-family:var(--disp);font-weight:700;font-size:1.0625rem;color:var(--fg)}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary .qcat{font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cy);border:1px solid var(--line-2);background:rgba(56,186,223,.09);padding:.35rem .55rem;border-radius:99px;flex:none;margin-top:.15rem;min-width:96px;text-align:center}
+.faq-item summary .qcat{font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:#9FEDFF;border:1px solid var(--line-2);background:rgba(56,186,223,.09);padding:.35rem .55rem;border-radius:99px;flex:none;margin-top:.15rem;min-width:96px;text-align:center}
 .faq-item summary .qtext{flex:1}
 .faq-item summary .chev{flex:none;width:13px;height:13px;border-right:2px solid var(--cy);border-bottom:2px solid var(--cy);transform:rotate(45deg);margin-top:.35rem;transition:transform .25s ease}
 .faq-item[open] summary .chev{transform:rotate(-135deg)}
@@ -467,6 +467,23 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
   .faq-item .ans{padding-left:clamp(16px,2vw,22px)}
   .int-chip{height:58px;min-width:130px}
 }
+
+/* ===== review fixes: dead space, centred CTAs ===== */
+/* A six-word question does not need a 1,390px row. */
+#faq .faq-item{max-width:1040px;margin-left:auto;margin-right:auto}
+/* The note box left ~1,100px of empty width beside its CTA. Centre it and
+   hold the prose to a readable measure instead of stretching it. */
+.note{text-align:center}
+.note>*{max-width:78ch;margin-left:auto;margin-right:auto}
+.note .btn{margin-left:auto;margin-right:auto}
+/* Beth asked for the CTAs centred. */
+.ind-panel>p:last-child{justify-content:center}
+#build>.wrap>p:last-of-type,#insights>.wrap>p:last-of-type{text-align:center}
+/* backdrop-filter on a button next to an animating one smears on repaint,
+   which is what read as two overlapping buttons. It buys nothing here. */
+.btn-ghost{backdrop-filter:none;background:rgba(19,62,82,.82)}
+.ind-panel>p:last-child{gap:1.25rem}
+
 
 .ribbon{position:relative;z-index:90;background:linear-gradient(96deg,var(--cy-2),var(--cy) 50%,var(--vi));color:#02222B;text-align:center;padding:.6rem 1rem;font:700 .75rem/1.4 var(--sans);letter-spacing:.03em}
 </style>
@@ -1796,7 +1813,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Job Status Notifications</h3><p>Stop &ldquo;When will the crew arrive?&rdquo; calls, customers get automatic updates and live ETAs</p></div>
           <div class="glass card auto-card"><h3>Invoice &amp; Payment Reminders</h3><p>Get paid faster, automated payment follow-ups cut collection time from 45 days to under 14</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Home Services Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Home Services Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
       <div class="ind-panel" role="tabpanel" id="panel-healthcare" aria-labelledby="tab-healthcare" hidden>
         <p class="ind-note">Dental practices recover an average of $47K in lapsed-patient revenue within the first 30 days.</p>
@@ -1810,7 +1827,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Insurance Verification Bot</h3><p>Pre-verify coverage before appointments, saves 15+ minutes per patient</p></div>
           <div class="glass card auto-card"><h3>Waitlist Management</h3><p>Automatically fill cancellations from your waitlist before the slot goes empty</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Healthcare &amp; Dental Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Healthcare &amp; Dental Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
       <div class="ind-panel" role="tabpanel" id="panel-real-estate" aria-labelledby="tab-real-estate" hidden>
         <p class="ind-note">The first agent to respond wins 78% of the time. Our clients respond in under 30 seconds.</p>
@@ -1822,7 +1839,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Open House Follow-Up</h3><p>Instantly follow up with every visitor after an open house, no more lost sign-in sheets</p></div>
           <div class="glass card auto-card"><h3>Review &amp; Referral Automation</h3><p>Turn happy clients into 5-star reviews and referral sources on autopilot</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Real Estate Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Real Estate Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
       <div class="ind-panel" role="tabpanel" id="panel-legal" aria-labelledby="tab-legal" hidden>
         <p class="ind-note">Law firms using AI intake see 316% faster response times, critical when 30% of legal consumers hire within 3 days.</p>
@@ -1834,7 +1851,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Case Status Updates</h3><p>Proactively notify clients about case progress, the #1 bar complaint is lack of communication</p></div>
           <div class="glass card auto-card"><h3>Unsigned Retainer Follow-Up</h3><p>Automatically nudge prospects who haven&rsquo;t signed, recover 30&ndash;50% of lost consultations</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Legal Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Legal Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
       <div class="ind-panel" role="tabpanel" id="panel-automotive" aria-labelledby="tab-automotive" hidden>
         <p class="ind-note">Shops using automated confirmations cut no-shows from 15% to 5%, saving $200&ndash;$500 per empty bay.</p>
@@ -1846,7 +1863,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Declined Service Follow-Up</h3><p>Re-engage customers who said &ldquo;not today&rdquo; to recommended repairs, recover lost revenue</p></div>
           <div class="glass card auto-card"><h3>No-Show Reduction System</h3><p>Cut no-shows from 15% to 5% with automated confirmations, fill every bay, every day</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Automotive Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Automotive Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
       <div class="ind-panel" role="tabpanel" id="panel-restaurants" aria-labelledby="tab-restaurants" hidden>
         <p class="ind-note">Restaurants using automated review responses see 40% more repeat customers within 90 days.</p>
@@ -1858,7 +1875,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
           <div class="glass card auto-card"><h3>Post-Dining Feedback</h3><p>Capture feedback before it hits Yelp, resolve issues privately, amplify positive experiences</p></div>
           <div class="glass card auto-card"><h3>Staff Scheduling Assistant</h3><p>Cut 5+ hours/week of schedule building with demand-based AI scheduling</p></div>
         </div>
-        <p style="margin-top:1.6rem;display:flex;gap:.8rem;flex-wrap:wrap"><a class="btn btn-ghost" href="#final">See All Restaurants Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+        <p style="margin-top:1.6rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center"><a class="btn btn-ghost" href="#final">See All Restaurants Automations</a><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       </div>
     </div>
     <p class="small rv d1" style="margin-top:1.6rem">Don&rsquo;t see your industry? If your business has a phone, a CRM, or a team doing repetitive work, we can automate it. Let&rsquo;s talk.</p>
@@ -1942,7 +1959,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 
     <div class="glass note rv" style="margin-top:2rem">
       <p style="margin-bottom:.7rem">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope. Want to know what&rsquo;s possible for your business?</p>
-      <p style="margin:1.15rem 0 1.15rem"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
+      <p style="margin:1.15rem auto"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
       <p style="margin-bottom:.7rem">Or call us directly: <a href="tel:+15047174837"><strong>(504) 717-4837</strong></a></p>
       <p class="small" style="margin:0">Sources: McKinsey Global Institute, Harvard Business Review, IBM, Gartner, Clio Legal Trends Report, BrightLocal, Invoca, Omnisend, Ardent Partners, Ponemon Institute, and others. Full citations available upon request.</p>
     </div>
@@ -1967,7 +1984,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
         </ul>
       </div>
       <div>
-        <p class="lab" style="color:var(--cy-2)">With FlowBots</p><h3 class="grad">AI-Powered Automation</h3>
+        <p class="lab" style="color:#9FEDFF">With FlowBots</p><h3 class="grad">AI-Powered Automation</h3>
         <ul>
           <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.7L13 4.9" stroke="#4BE8A8" stroke-width="2.2" stroke-linecap="round"/></svg>Every call answered 24/7</li>
           <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.7L13 4.9" stroke="#4BE8A8" stroke-width="2.2" stroke-linecap="round"/></svg>Sub-second follow-up responses</li>
@@ -2029,7 +2046,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
     <div class="glass inv rv">
       <div><p class="lab">A Full-Time Receptionist</p><b>$3,500+<span style="font-size:1rem">/mo</span></b><p>Works 9&ndash;5. Takes vacations. Handles one call at a time. Misses after-hours leads.</p></div>
       <div><p class="lab">A Missed Lead</p><b>$500&ndash;$50K</b><p>Every unanswered call, every slow follow-up, every lead that went to your competitor instead.</p></div>
-      <div><p class="lab" style="color:var(--cy-2)">FlowBots AI</p><b>24/7/365</b><p>Handles unlimited calls simultaneously. Never takes a day off. Gets smarter over time.</p></div>
+      <div><p class="lab" style="color:#9FEDFF">FlowBots AI</p><b>24/7/365</b><p>Handles unlimited calls simultaneously. Never takes a day off. Gets smarter over time.</p></div>
     </div>
     <div class="glass note rv d1">Projects start at <strong>$15,000</strong>. Most clients see measurable ROI within 90 days. We give you a fixed-price proposal before any work begins, so you know exactly what you&rsquo;re investing before you sign anything. Calculate your actual automation ROI on our free discovery call.</div>
   </div>
@@ -2054,7 +2071,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
         </ul>
       </div>
       <div>
-        <p class="lab" style="color:var(--cy-2)">FlowBots Custom Build</p><h3 class="grad">What Custom Gets You</h3>
+        <p class="lab" style="color:#9FEDFF">FlowBots Custom Build</p><h3 class="grad">What Custom Gets You</h3>
         <ul>
           <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.7L13 4.9" stroke="#4BE8A8" stroke-width="2.2" stroke-linecap="round"/></svg>AI system designed for your exact workflows</li>
           <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.7L13 4.9" stroke="#4BE8A8" stroke-width="2.2" stroke-linecap="round"/></svg>We study your business before writing a line of code</li>
