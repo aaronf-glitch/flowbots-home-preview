@@ -473,13 +473,16 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 #faq .faq-item{max-width:1040px;margin-left:auto;margin-right:auto}
 /* The note box left ~1,100px of empty width beside its CTA. Centre it and
    hold the prose to a readable measure instead of stretching it. */
-.note{max-width:1040px;margin-left:auto;margin-right:auto;text-align:center}
-.note>*{max-width:740px;margin-left:auto;margin-right:auto}
+/* One measure, not two. Capping the box AND its children guaranteed a gap
+   between them; the box itself is the measure now and the prose fills it. */
+.note{max-width:860px;margin-left:auto;margin-right:auto;text-align:left}
+.note>*{max-width:none;margin-left:0;margin-right:0}
+.note>.cta-row{margin-left:auto;margin-right:auto}
 .note .btn{margin-left:auto;margin-right:auto}
 /* A note that is prose rather than a CTA reads left, flush with its padding,
    and every paragraph shares one edge. */
 .note-prose{text-align:left}
-.note-prose>*{max-width:78ch;margin-left:0;margin-right:0}
+.note-prose>*{max-width:none;margin-left:0;margin-right:0}
 .note-prose>*+*{margin-top:.7rem}
 .note-prose p{margin-bottom:0}
 /* Beth asked for the CTAs centred. */
