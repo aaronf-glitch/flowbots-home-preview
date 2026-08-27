@@ -488,7 +488,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 
 /* FAQ in two columns: a six-word question filled maybe a third of a full-width
    row, so the rest read as dead space. Each column is now roughly 500px. */
-.faq-grid{max-width:1180px;margin:0 auto}
+.faq-grid{max-width:870px;margin:0 auto}
 #faq .faq-item{max-width:none;margin:0 0 .7rem}
 .faq-item summary{gap:1rem}
 .faq-item summary .qcat{min-width:96px}
@@ -504,6 +504,22 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 .btn-call:hover{border-color:var(--cy);color:#EAFBFF;transform:translateY(-2px);
   box-shadow:0 0 26px -12px var(--glow)}
 .btn-call svg{flex:none}
+
+
+/* Two calls to action belong on one line, not stacked. `margin:auto` on a flex
+   child absorbs the free space, which is what pushed them 132px apart. */
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;align-items:center}
+.cta-row .btn{margin-left:0;margin-right:0}
+
+/* Centred running text is hard to read. The box stays centred, the CTA row
+   stays centred, the prose reads left. */
+.note{text-align:left}
+.note .cta-row,.note>p:has(.btn){text-align:center}
+.note>p:first-child{font-weight:600;color:var(--fg)}
+.note .small{color:var(--fg-3)}
+/* the closing line under the industry tabs was left aligned while the buttons
+   above it were centred */
+#industries>.wrap>.small{text-align:center;max-width:78ch;margin-left:auto;margin-right:auto}
 
 
 .ribbon{position:relative;z-index:90;background:linear-gradient(96deg,var(--cy-2),var(--cy) 50%,var(--vi));color:#02222B;text-align:center;padding:.6rem 1rem;font:700 .75rem/1.4 var(--sans);letter-spacing:.03em}
@@ -1980,8 +1996,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
 
     <div class="glass note rv" style="margin-top:2rem">
       <p style="margin:0 auto .7rem">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope. Want to know what&rsquo;s possible for your business?</p>
-      <p style="margin:1.15rem auto"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a></p>
-      <p style="margin:0 auto .9rem"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p>
+      <p class="cta-row" style="margin:1.15rem auto .9rem"><a class="btn btn-primary" href="#final">Book My Free Discovery Call</a><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p>
       <p class="small" style="margin:0 auto">Sources: McKinsey Global Institute, Harvard Business Review, IBM, Gartner, Clio Legal Trends Report, BrightLocal, Invoca, Omnisend, Ardent Partners, Ponemon Institute, and others. Full citations available upon request.</p>
     </div>
   </div>
@@ -2030,7 +2045,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
       <div class="glass card rv d1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6L4 12l5 6M15 6l5 6-5 6" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p class="lab">Step 02</p><h3>Build</h3><p style="margin:0">We design and build a custom AI system that handles your specific tasks: calls, texts, emails, CRM updates, dispatching, compliance, whatever you need.</p></div>
       <div class="glass card rv d2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20V7m0 0l-4 4m4-4l4 4" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="4" r="1.6" fill="#C4B5FD"/></svg></span><p class="lab">Step 03</p><h3>Launch</h3><p style="margin:0">Your AI goes live. We monitor, optimize and support. You focus on running your business.</p></div>
     </div>
-    <div class="glass note rv d3" style="margin-top:2rem"><p style="margin:0 auto 1rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices.</p><p style="margin:0 auto"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p></div>
+    <div class="glass note rv d3" style="margin-top:2rem"><p style="margin:0 auto 1rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices.</p><p class="cta-row" style="margin:0 auto"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p></div>
   </div>
 </section>
 
@@ -2214,7 +2229,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:.6875rem;let
         <div class="ans"><p>Every project starts with a fixed-price proposal. You know exactly what you&rsquo;re paying before any work begins. No surprise invoices, no scope creep charges. And your data and workflows are always yours, the code, the automations, the integrations. It&rsquo;s yours.</p></div>
       </details>
       <details class="glass faq-item rv">
-        <summary><span class="qcat">Getting Started</span><span class="qtext">How do I get started with custom AI automation?</span><span class="chev"></span></summary>
+        <summary><span class="qcat">Getting Started</span><span class="qtext">How do I get started with custom AI automation for my business?</span><span class="chev"></span></summary>
         <div class="ans"><p>Book a free discovery call. We&rsquo;ll spend 30 minutes mapping your current workflows, identifying automation opportunities, and showing you exactly what&rsquo;s possible. No pressure. No sales pitch.</p></div>
       </details>
       </div>
