@@ -1087,7 +1087,7 @@ section[data-anim].force-show:not(.sec-in) .anim-item{opacity:1;transform:none}
    from the console and the photo frames, the cyan-to-violet gradient from .grad,
    and the mono step label. Drawn with background layers because .card::before
    is already the hover glow. */
-#how .cols-3>.card{
+#how .cols-3>.card,#how .note{
   position:relative;overflow:hidden;
   background:
     /* faint circuit grid */
@@ -1098,17 +1098,17 @@ section[data-anim].force-show:not(.sec-in) .anim-item{opacity:1;transform:none}
   box-shadow:0 20px 44px -34px rgba(6,42,58,.55),inset 0 1px 0 rgba(255,255,255,.9)}
 
 /* cyan to violet hairline along the top edge, the .grad ramp as a rule */
-#how .cols-3>.card::after{
+#how .cols-3>.card::after,#how .note::after{
   content:"";position:absolute;left:0;right:0;top:0;height:2px;
   background:linear-gradient(90deg,#0E7C9C,#2E7FB5 45%,#5B3FBF);
   box-shadow:0 0 12px rgba(14,124,156,.55)}
 
 /* HUD corner brackets, the same mark the console and the photo frames carry */
-#how .cols-3>.card>.hudx{position:absolute;inset:0;pointer-events:none}
-#how .cols-3>.card>.hudx::before,#how .cols-3>.card>.hudx::after{
+#how .hudx{position:absolute;inset:0;pointer-events:none}
+#how .hudx::before,#how .hudx::after{
   content:"";position:absolute;width:15px;height:15px;border:2px solid rgba(14,124,156,.55)}
-#how .cols-3>.card>.hudx::before{left:0;bottom:0;border-top:0;border-right:0;border-radius:0 0 0 13px}
-#how .cols-3>.card>.hudx::after{right:0;bottom:0;border-top:0;border-left:0;border-radius:0 0 13px 0}
+#how .hudx::before{left:0;bottom:0;border-top:0;border-right:0;border-radius:0 0 0 13px}
+#how .hudx::after{right:0;bottom:0;border-top:0;border-left:0;border-radius:0 0 13px 0}
 
 /* the icon chip stops being a pale square */
 #how .cols-3>.card .ico{
@@ -1125,6 +1125,11 @@ section[data-anim].force-show:not(.sec-in) .anim-item{opacity:1;transform:none}
   font-family:var(--disp);font-weight:700;font-size:3.5rem;line-height:1;
   color:transparent;-webkit-text-stroke:1.5px rgba(10,92,119,.18)}
 #how .cols-3>.card h3,#how .cols-3>.card p{position:relative;z-index:2}
+
+/* The note joins the step cards, per Ron: same grid, same rail, same corner
+   brackets. Its own children sit above the grid layer. */
+#how .note>p{position:relative;z-index:2}
+#how .note{padding:clamp(22px,2.8vw,32px)}
 </style>
 </head>
 <body>
@@ -2679,7 +2684,7 @@ section[data-anim].force-show:not(.sec-in) .anim-item{opacity:1;transform:none}
       <div class="glass card"><span class="hudx" aria-hidden="true"></span><span class="stepno" aria-hidden="true">02</span><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6L4 12l5 6M15 6l5 6-5 6" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p class="lab">Step 02</p><h3>Build</h3><p style="margin:0">We design and build a custom AI system that handles your specific tasks: calls, texts, emails, CRM updates, dispatching, compliance, whatever you need.</p></div>
       <div class="glass card"><span class="hudx" aria-hidden="true"></span><span class="stepno" aria-hidden="true">03</span><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20V7m0 0l-4 4m4-4l4 4" stroke="#7FE3FA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="4" r="1.6" fill="#DCD0FF"/></svg></span><p class="lab">Step 03</p><h3>Launch</h3><p style="margin:0">Your AI goes live. We monitor, optimize and support. You focus on running your business.</p></div>
     </div>
-    <div class="glass note" style="margin-top:2rem"><p style="margin:0 auto 1rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices.</p><p class="cta-row" style="margin:0 auto"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p></div>
+    <div class="glass note" style="margin-top:2rem"><span class="hudx" aria-hidden="true"></span><p style="margin:0 auto 1rem">Most projects go live in 4&ndash;8 weeks. Fixed-price proposals, no surprise invoices.</p><p class="cta-row" style="margin:0 auto"><a class="btn btn-call" href="tel:+15047174837"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="17" height="17"><path d="M5 8.5a2.5 2.5 0 012.5-2.5h1.2l1.3 3-1.6 1.2a11 11 0 005.4 5.4l1.2-1.6 3 1.3v1.2A2.5 2.5 0 0115.5 19 12.5 12.5 0 015 8.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Call (504) 717-4837</a></p></div>
   </div>
 </section>
 
