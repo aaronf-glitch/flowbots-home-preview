@@ -27,7 +27,12 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--on-paper);
-  font-family:var(--sans);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  font-family:var(--sans);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  /* Ron reviews this at 110% browser zoom, so the page ships at that size.
+     zoom scales the whole system together - type, spacing, rules and images -
+     which is exactly what the browser control does. Scaling the font sizes
+     alone would have grown the type and left the spacing behind. */
+  zoom:1.1}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--brand-deep);outline-offset:3px}
@@ -109,8 +114,22 @@ section{padding-block:var(--pad)}
 .hero-foot span{display:flex;align-items:center;gap:8px}
 .hero-foot span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brand-deep)}
 
+/* ---------- hero banner ----------
+   A wide strip under the headline. It is the client's own photograph, already in
+   redesign/assets/scenes, so nothing was sourced for it. Sized and given an
+   explicit width and height so it reserves its space and does not shift the page
+   as it loads. */
+.banner{margin:clamp(38px,4vw,58px) 0 0}
+.banner img{width:100%;height:auto;aspect-ratio:1500/550;object-fit:cover;
+  object-position:center 42%}
+.banner figcaption{margin-top:12px;font-family:var(--mono);font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--on-paper-3)}
+@media (max-width:760px){
+  .banner img{aspect-ratio:16/10;object-position:76% 42%}
+}
+
 /* ---------- SIGNATURE: the overnight ledger ---------- */
-.ledger{margin-top:clamp(52px,5.5vw,86px);border-top:2px solid var(--ink)}
+.ledger{margin-top:clamp(46px,4.6vw,72px);border-top:2px solid var(--ink)}
 .ledger-cap{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding:16px 0 18px;
   font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-paper-3)}
 .ledger-cap b{color:var(--on-paper);font-weight:500;letter-spacing:.06em}
@@ -196,6 +215,21 @@ section{padding-block:var(--pad)}
 .folk .role{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--on-ink-3);margin:4px 0 14px}
 .folk p{max-width:46ch}
+
+/* ---------- pull quote ----------
+   The founders' line was attributed but never marked up as a quotation, so it
+   read as ordinary body copy sitting above a name. It is a blockquote now, set
+   in the display serif with a hanging quote mark and a rule, so a reader can see
+   at a glance that someone is speaking. */
+.pull{margin:40px 0 0;padding-left:clamp(20px,2.2vw,30px);border-left:2px solid var(--brand);
+  max-width:52ch}
+.pull blockquote{margin:0;font-family:var(--disp);font-size:clamp(23px,2.1vw,30px);
+  line-height:1.28;letter-spacing:-.012em;color:var(--on-ink)}
+.pull blockquote::before{content:"“";color:var(--brand)}
+.pull blockquote::after{content:"”";color:var(--brand)}
+.pull figcaption{margin-top:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--on-ink-3)}
+.ink .pull blockquote{color:var(--on-ink)}
 
 /* ---------- FAQ ---------- */
 /* The FAQ rows ran the full 1180px while the questions only filled the left
@@ -321,6 +355,11 @@ section{padding-block:var(--pad)}
       <a class="btn btn-line" href="#how">See How It Works</a>
     </div>
     <p class="hero-foot rv"><span>HIPAA compliant</span><span>SOC 2 certified</span><span>Fixed-price proposals</span><span>Live in 4&ndash;8 weeks</span></p>
+
+    <figure class="banner rv">
+      <img src="assets/scenes/call-agents.jpg" alt="Agents wearing headsets taking customer calls in a daylit office." width="1500" height="550" fetchpriority="high" decoding="async">
+      <figcaption>The calls your team takes by hand are the ones we automate first</figcaption>
+    </figure>
 
     <!-- SIGNATURE: the overnight ledger -->
     <div class="ledger rv">
@@ -530,8 +569,10 @@ section{padding-block:var(--pad)}
         <p>Ten-plus years building enterprise automation and AI systems. Hanson designs the architecture behind every FlowBots project, from voice AI to complex multi-system integrations, and does not outsource the technical work.</p>
       </div>
     </div>
-    <p class="lede rv" style="margin-top:36px">We started FlowBots because we saw businesses spending thousands on tools that did not talk to each other, and teams buried in work machines should handle. We build the systems that fix that.</p>
-    <p class="sm rv">Brian &amp; Hanson, co-founders</p>
+    <figure class="pull rv">
+      <blockquote>We started FlowBots because we saw businesses spending thousands on tools that did not talk to each other, and teams buried in work machines should handle. We build the systems that fix that.</blockquote>
+      <figcaption>Brian &amp; Hanson, co-founders</figcaption>
+    </figure>
   </div>
 </section>
 
