@@ -102,6 +102,45 @@ section{padding-block:var(--pad)}
 .burger{display:none;background:none;border:1px solid var(--rule);border-radius:2px;
   padding:9px 13px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 
+/* ---------- hero background: the flow plan ----------
+   Not a photograph. The product is workflow, and this design's world is a
+   printed technical document, so the ground is a plan of that workflow drawn
+   in hairlines on the paper: rails, junction nodes, and a few jobs travelling
+   along them. Everything sits at 5-14% alpha so it reads as a watermark, and
+   a mask fades it out behind the headline column so type contrast is never
+   spent on decoration. Purely decorative, so it is aria-hidden and inert. */
+.hero{position:relative;isolation:isolate}
+.hero > .wrap{position:relative;z-index:1}
+.plan{position:absolute;left:0;right:0;top:0;height:min(820px,100%);
+  z-index:0;pointer-events:none;overflow:hidden;
+  /* the drawing lives to the RIGHT of the copy and dies away before it */
+  -webkit-mask-image:linear-gradient(100deg,transparent 0%,transparent 46%,#000 72%,#000 100%);
+  mask-image:linear-gradient(100deg,transparent 0%,transparent 46%,#000 72%,#000 100%)}
+.plan .paper-grid{position:absolute;inset:0;
+  background-image:linear-gradient(to right,rgba(11,84,104,.07) 1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(11,84,104,.07) 1px,transparent 1px);
+  background-size:56px 56px}
+.plan svg{position:absolute;inset:0;width:100%;height:100%}
+.plan .rail{fill:none;stroke:rgba(11,84,104,.28);stroke-width:1.2}
+.plan .rail.soft{stroke:rgba(11,84,104,.17)}
+.plan .node{fill:none;stroke:rgba(11,84,104,.42);stroke-width:1.2}
+.plan .node-fill{fill:rgba(246,244,239,.92)}
+.plan .hub{fill:none;stroke:rgba(11,84,104,.5);stroke-width:1.3}
+.plan .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  fill:rgba(11,84,104,.5);text-transform:uppercase}
+.plan .job{fill:var(--brand-deep);opacity:.75}
+
+/* the jobs travel. transform only, linear because it is constant motion. */
+@keyframes flow{
+  0%{transform:translateX(0);opacity:0}
+  8%{opacity:.8}
+  88%{opacity:.8}
+  100%{transform:translateX(var(--run));opacity:0}
+}
+.plan .job{animation:flow var(--dur,17s) linear infinite;animation-delay:var(--lag,0s)}
+@media (prefers-reduced-motion:reduce){ .plan .job{animation:none;opacity:.4} }
+@media (max-width:900px){ .plan{display:none} }
+
 /* ---------- hero: typographic, no illustrated scene ---------- */
 .hero{padding-top:clamp(52px,6vw,92px);padding-bottom:0}
 .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
@@ -405,6 +444,51 @@ section{padding-block:var(--pad)}
 
 <!-- HERO -->
 <section class="hero">
+  <div class="plan" aria-hidden="true">
+    <div class="paper-grid"></div>
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMaxYMid slice" focusable="false">
+      <!-- four intake rails feeding one hub, then two outputs. The shape of a
+           FlowBots build: many channels in, one system, work back out. -->
+      <path class="rail" d="M470 150 H840 Q866 150 866 176 V404 Q866 430 892 430 H1010"/>
+      <path class="rail" d="M470 300 H770 Q796 300 796 326 V404 Q796 430 822 430 H1010"/>
+      <path class="rail" d="M470 560 H770 Q796 560 796 534 V456 Q796 430 822 430 H1010"/>
+      <path class="rail" d="M470 710 H840 Q866 710 866 684 V456 Q866 430 892 430 H1010"/>
+      <path class="rail soft" d="M1130 430 H1290 Q1316 430 1316 404 V250"/>
+      <path class="rail soft" d="M1130 430 H1290 Q1316 430 1316 456 V620"/>
+      <path class="rail soft" d="M600 150 V300 M600 560 V710"/>
+
+      <!-- junctions -->
+      <g class="node">
+        <circle class="node-fill" cx="600" cy="150" r="6"/><circle cx="600" cy="150" r="6"/>
+        <circle class="node-fill" cx="600" cy="300" r="6"/><circle cx="600" cy="300" r="6"/>
+        <circle class="node-fill" cx="600" cy="560" r="6"/><circle cx="600" cy="560" r="6"/>
+        <circle class="node-fill" cx="600" cy="710" r="6"/><circle cx="600" cy="710" r="6"/>
+        <circle class="node-fill" cx="1316" cy="250" r="6"/><circle cx="1316" cy="250" r="6"/>
+        <circle class="node-fill" cx="1316" cy="620" r="6"/><circle cx="1316" cy="620" r="6"/>
+      </g>
+
+      <!-- the hub -->
+      <rect class="node-fill" x="1010" y="386" width="120" height="88" rx="10"/>
+      <rect class="hub" x="1010" y="386" width="120" height="88" rx="10"/>
+      <rect class="hub" x="1030" y="406" width="80" height="48" rx="7" opacity=".55"/>
+      <circle class="hub" cx="1050" cy="430" r="6"/><circle class="hub" cx="1090" cy="430" r="6"/>
+      <path class="rail" d="M1050 448 H1090"/>
+
+      <text class="tag" x="486" y="140">CALL</text>
+      <text class="tag" x="486" y="290">TEXT</text>
+      <text class="tag" x="486" y="550">FORM</text>
+      <text class="tag" x="486" y="700">EMAIL</text>
+      <text class="tag" x="1332" y="244">BOOKED</text>
+      <text class="tag" x="1332" y="614">SYNCED</text>
+
+      <!-- jobs moving down the intake rails -->
+      <circle class="job" cx="480" cy="150" r="3.4" style="--run:340px;--dur:15s;--lag:0s"/>
+      <circle class="job" cx="480" cy="300" r="3.4" style="--run:280px;--dur:19s;--lag:3.5s"/>
+      <circle class="job" cx="480" cy="560" r="3.4" style="--run:280px;--dur:17s;--lag:7s"/>
+      <circle class="job" cx="480" cy="710" r="3.4" style="--run:340px;--dur:21s;--lag:10.5s"/>
+      <circle class="job" cx="1140" cy="430" r="3.4" style="--run:150px;--dur:13s;--lag:5s"/>
+    </svg>
+  </div>
   <div class="wrap">
     <p class="kicker rv"><s></s>Custom AI automation &middot; 25+ industries</p>
     <h1 class="rv">We automate the work your team <em>shouldn&rsquo;t</em> be doing.</h1>
