@@ -209,9 +209,12 @@ section{padding-block:var(--pad)}
    the shape the source images were actually taken in. The heavy grey grade is
    gone too - these read as real work, and burying them under 55% grey was
    fighting the photographs rather than using them. */
-.ind img{aspect-ratio:4/5;object-fit:cover;width:100%;
-  filter:grayscale(.18) contrast(1.02);transition:filter .22s ease,transform .3s var(--e)}
-@media (hover:hover) and (pointer:fine){.ind:hover img{filter:none}}
+/* Matched to how the live Design 1 presents these exact files: 16/10, the
+   subject held at 45% height, and NO grade. The portrait crop and the grey
+   wash were my own calls and neither was asked for - Ron pointed at that page
+   and said take the industry images from it, so the treatment comes with them. */
+.ind img{aspect-ratio:16/10;object-fit:cover;object-position:center 45%;width:100%;
+  transition:transform .3s var(--e)}
 .ind h3{margin:14px 0 6px}
 .ind p{font-size:15px;color:var(--on-paper-2);max-width:36ch;margin:0}
 
