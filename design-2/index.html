@@ -198,7 +198,14 @@ section{padding-block:var(--pad)}
 .folk p{max-width:46ch}
 
 /* ---------- FAQ ---------- */
-.qa{border-top:1px solid var(--rule)}
+/* The FAQ rows ran the full 1180px while the questions only filled the left
+   half, opening a dead column down the right. The whole section is centred and
+   the list held to a readable measure so the rule lines end where the text does. */
+#faq .head{margin-inline:auto;text-align:center;max-width:640px}
+#faq .head .num{justify-content:center}
+#faq .head .num i{display:none}
+#faq .head .lede{margin-inline:auto}
+.qa{border-top:1px solid var(--rule);max-width:820px;margin-inline:auto}
 .qa details{border-bottom:1px solid var(--rule)}
 .qa summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;position:relative;
   font-size:19px;font-weight:600;letter-spacing:-.005em}
@@ -213,18 +220,23 @@ section{padding-block:var(--pad)}
 
 /* ---------- closing + footer ---------- */
 .close h2{max-width:16ch;margin-bottom:20px}
-.foot{background:var(--ink);color:var(--on-ink);padding-block:clamp(48px,5vw,72px)}
+/* The closing CTA is ink and the footer was ink, so the two ran together as one
+   unbroken black block with no boundary. The footer moves onto the paper tint and
+   takes a heavy top rule, which is the same hard tone jump the rest of the page
+   uses to separate one section from the next. */
+.foot{background:var(--paper-2);color:var(--on-paper);border-top:3px solid var(--ink);
+  padding-block:clamp(48px,5vw,72px)}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
 .foot h3{font-size:12.5px;font-family:var(--mono);letter-spacing:.11em;text-transform:uppercase;
-  color:var(--on-ink-3);font-weight:500;margin-bottom:16px}
+  color:var(--on-paper-3);font-weight:500;margin-bottom:16px}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.foot a:not(.btn){text-decoration:none;color:var(--on-ink-2);font-size:17px;
+.foot a:not(.btn){text-decoration:none;color:var(--on-paper-2);font-size:17px;
   border-bottom:1px solid transparent;transition:color .16s ease,border-color .16s ease}
-.foot .sm{color:var(--on-ink-3)}
-@media (hover:hover) and (pointer:fine){.foot a:not(.btn):hover{color:var(--on-ink);border-color:var(--on-ink)}}
-.foot-base{margin-top:44px;padding-top:22px;border-top:1px solid var(--rule-ink);
+.foot .sm{color:var(--on-paper-3)}
+@media (hover:hover) and (pointer:fine){.foot a:not(.btn):hover{color:var(--on-paper);border-color:var(--on-paper)}}
+.foot-base{margin-top:44px;padding-top:22px;border-top:1px solid var(--rule);
   display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:space-between;
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--on-ink-3)}
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--on-paper-3)}
 
 /* ---------- motion: restrained. reveal and underline only ---------- */
 /* Content is VISIBLE by default. Nothing here can leave the page blank.
@@ -593,9 +605,9 @@ section{padding-block:var(--pad)}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="logo" href="#" style="color:var(--on-ink);margin-bottom:16px" aria-label="FlowBots.ai home">
-          <svg viewBox="0 0 58 58" aria-hidden="true"><g fill="none"><path d="M29 4v7" stroke="#F6F4EF" stroke-width="2.4" stroke-linecap="round"/><circle cx="29" cy="4" r="3" fill="#38BADF"/><rect x="8" y="13" width="42" height="34" rx="11" fill="#F6F4EF"/><rect x="15" y="21" width="28" height="15" rx="6" fill="#16181C"/><rect x="19" y="24" width="7" height="9" rx="3" fill="#38BADF"/><rect x="32" y="24" width="7" height="9" rx="3" fill="#38BADF"/><path d="M22 41h14" stroke="#16181C" stroke-width="2" stroke-linecap="round"/><rect x="2" y="24" width="6" height="13" rx="3" fill="#F6F4EF"/><rect x="50" y="24" width="6" height="13" rx="3" fill="#F6F4EF"/></g></svg>
-          <span>flowbots<span style="color:#38BADF">.ai</span></span>
+        <a class="logo" href="#" style="margin-bottom:16px" aria-label="FlowBots.ai home">
+          <svg viewBox="0 0 58 58" aria-hidden="true"><g fill="none"><path d="M29 4v7" stroke="#16181C" stroke-width="2.4" stroke-linecap="round"/><circle cx="29" cy="4" r="3" fill="#38BADF"/><rect x="8" y="13" width="42" height="34" rx="11" fill="#16181C"/><rect x="15" y="21" width="28" height="15" rx="6" fill="#F6F4EF"/><rect x="19" y="24" width="7" height="9" rx="3" fill="#38BADF"/><rect x="32" y="24" width="7" height="9" rx="3" fill="#38BADF"/><path d="M22 41h14" stroke="#F6F4EF" stroke-width="2" stroke-linecap="round"/><rect x="2" y="24" width="6" height="13" rx="3" fill="#16181C"/><rect x="50" y="24" width="6" height="13" rx="3" fill="#16181C"/></g></svg>
+          <span>flowbots<span style="color:var(--brand-deep)">.ai</span></span>
         </a>
         <p class="sm" style="max-width:34ch">Custom AI automation for businesses that are tired of doing machine work by hand.</p>
         <p class="sm"><a href="tel:+15047174837">(504) 717-4837</a></p>
