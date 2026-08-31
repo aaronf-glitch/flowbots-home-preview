@@ -113,9 +113,10 @@ section{padding-block:var(--pad)}
 .hero > .wrap{position:relative;z-index:1}
 .plan{position:absolute;left:0;right:0;top:0;height:min(820px,100%);
   z-index:0;pointer-events:none;overflow:hidden;
-  /* the drawing lives to the RIGHT of the copy and dies away before it */
-  -webkit-mask-image:linear-gradient(100deg,transparent 0%,transparent 46%,#000 72%,#000 100%);
-  mask-image:linear-gradient(100deg,transparent 0%,transparent 46%,#000 72%,#000 100%)}
+  /* the drawing runs edge to edge and is cleared only where the copy sits,
+     so both gutters carry it instead of leaving the left side bare */
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 8%,transparent 21%,transparent 55%,#000 71%,#000 100%);
+  mask-image:linear-gradient(90deg,#000 0%,#000 8%,transparent 21%,transparent 55%,#000 71%,#000 100%)}
 .plan .paper-grid{position:absolute;inset:0;
   background-image:linear-gradient(to right,rgba(11,84,104,.07) 1px,transparent 1px),
                    linear-gradient(to bottom,rgba(11,84,104,.07) 1px,transparent 1px);
@@ -446,23 +447,24 @@ section{padding-block:var(--pad)}
 <section class="hero">
   <div class="plan" aria-hidden="true">
     <div class="paper-grid"></div>
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMaxYMid slice" focusable="false">
-      <!-- four intake rails feeding one hub, then two outputs. The shape of a
-           FlowBots build: many channels in, one system, work back out. -->
-      <path class="rail" d="M470 150 H840 Q866 150 866 176 V404 Q866 430 892 430 H1010"/>
-      <path class="rail" d="M470 300 H770 Q796 300 796 326 V404 Q796 430 822 430 H1010"/>
-      <path class="rail" d="M470 560 H770 Q796 560 796 534 V456 Q796 430 822 430 H1010"/>
-      <path class="rail" d="M470 710 H840 Q866 710 866 684 V456 Q866 430 892 430 H1010"/>
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <!-- Four intake rails begin off the left edge, cross the page, and
+           converge on one hub; two outputs leave it. Both gutters carry the
+           drawing so neither side of the copy is bare. -->
+      <path class="rail" d="M-40 150 H840 Q866 150 866 176 V404 Q866 430 892 430 H1010"/>
+      <path class="rail" d="M-40 300 H770 Q796 300 796 326 V404 Q796 430 822 430 H1010"/>
+      <path class="rail" d="M-40 560 H770 Q796 560 796 534 V456 Q796 430 822 430 H1010"/>
+      <path class="rail" d="M-40 710 H840 Q866 710 866 684 V456 Q866 430 892 430 H1010"/>
       <path class="rail soft" d="M1130 430 H1290 Q1316 430 1316 404 V250"/>
       <path class="rail soft" d="M1130 430 H1290 Q1316 430 1316 456 V620"/>
-      <path class="rail soft" d="M600 150 V300 M600 560 V710"/>
+      <path class="rail soft" d="M150 150 V300 M150 560 V710 M1480 250 H1560 M1480 620 H1560"/>
 
-      <!-- junctions -->
+      <!-- junctions, in the left gutter and out at the results -->
       <g class="node">
-        <circle class="node-fill" cx="600" cy="150" r="6"/><circle cx="600" cy="150" r="6"/>
-        <circle class="node-fill" cx="600" cy="300" r="6"/><circle cx="600" cy="300" r="6"/>
-        <circle class="node-fill" cx="600" cy="560" r="6"/><circle cx="600" cy="560" r="6"/>
-        <circle class="node-fill" cx="600" cy="710" r="6"/><circle cx="600" cy="710" r="6"/>
+        <circle class="node-fill" cx="150" cy="150" r="6"/><circle cx="150" cy="150" r="6"/>
+        <circle class="node-fill" cx="150" cy="300" r="6"/><circle cx="150" cy="300" r="6"/>
+        <circle class="node-fill" cx="150" cy="560" r="6"/><circle cx="150" cy="560" r="6"/>
+        <circle class="node-fill" cx="150" cy="710" r="6"/><circle cx="150" cy="710" r="6"/>
         <circle class="node-fill" cx="1316" cy="250" r="6"/><circle cx="1316" cy="250" r="6"/>
         <circle class="node-fill" cx="1316" cy="620" r="6"/><circle cx="1316" cy="620" r="6"/>
       </g>
@@ -474,18 +476,18 @@ section{padding-block:var(--pad)}
       <circle class="hub" cx="1050" cy="430" r="6"/><circle class="hub" cx="1090" cy="430" r="6"/>
       <path class="rail" d="M1050 448 H1090"/>
 
-      <text class="tag" x="486" y="140">CALL</text>
-      <text class="tag" x="486" y="290">TEXT</text>
-      <text class="tag" x="486" y="550">FORM</text>
-      <text class="tag" x="486" y="700">EMAIL</text>
+      <text class="tag" x="36" y="140">CALL</text>
+      <text class="tag" x="36" y="290">TEXT</text>
+      <text class="tag" x="36" y="550">FORM</text>
+      <text class="tag" x="36" y="700">EMAIL</text>
       <text class="tag" x="1332" y="244">BOOKED</text>
       <text class="tag" x="1332" y="614">SYNCED</text>
 
       <!-- jobs moving down the intake rails -->
-      <circle class="job" cx="480" cy="150" r="3.4" style="--run:340px;--dur:6.5s;--lag:0s"/>
-      <circle class="job" cx="480" cy="300" r="3.4" style="--run:280px;--dur:8s;--lag:1.5s"/>
-      <circle class="job" cx="480" cy="560" r="3.4" style="--run:280px;--dur:7.2s;--lag:3s"/>
-      <circle class="job" cx="480" cy="710" r="3.4" style="--run:340px;--dur:9s;--lag:4.5s"/>
+      <circle class="job" cx="20" cy="150" r="3.4" style="--run:820px;--dur:6.5s;--lag:0s"/>
+      <circle class="job" cx="20" cy="300" r="3.4" style="--run:760px;--dur:8s;--lag:1.5s"/>
+      <circle class="job" cx="20" cy="560" r="3.4" style="--run:760px;--dur:7.2s;--lag:3s"/>
+      <circle class="job" cx="20" cy="710" r="3.4" style="--run:820px;--dur:9s;--lag:4.5s"/>
       <circle class="job" cx="1140" cy="430" r="3.4" style="--run:150px;--dur:5.5s;--lag:2.2s"/>
     </svg>
   </div>
