@@ -204,7 +204,13 @@ section{padding-block:var(--pad)}
 /* ---------- industries ---------- */
 .inds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,34px)}
 .ind{text-decoration:none;display:block}
-.ind img{aspect-ratio:16/10;object-fit:cover;width:100%;filter:grayscale(.55) contrast(1.02);transition:filter .22s ease}
+/* The larger industry photographs are PORTRAIT (760x916 up to 1080x920), so a
+   16/10 landscape card cropped them hard. The cards are portrait now, which is
+   the shape the source images were actually taken in. The heavy grey grade is
+   gone too - these read as real work, and burying them under 55% grey was
+   fighting the photographs rather than using them. */
+.ind img{aspect-ratio:4/5;object-fit:cover;width:100%;
+  filter:grayscale(.18) contrast(1.02);transition:filter .22s ease,transform .3s var(--e)}
 @media (hover:hover) and (pointer:fine){.ind:hover img{filter:none}}
 .ind h3{margin:14px 0 6px}
 .ind p{font-size:15px;color:var(--on-paper-2);max-width:36ch;margin:0}
@@ -325,7 +331,7 @@ section{padding-block:var(--pad)}
   .ind:hover img{transform:scale(1.028)}
 }
 .ind{overflow:hidden}
-.ind img{transition:filter .22s ease,transform .3s var(--e)}
+
 
 /* --- 6. FAQ answer arrives rather than snapping in --- */
 .qa details[open] .ans{animation:rise .24s var(--e) both}
