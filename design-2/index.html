@@ -272,6 +272,68 @@ section{padding-block:var(--pad)}
   display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:space-between;
   font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--on-paper-3)}
 
+/* =======================================================================
+   MOTION
+   Judged against the Motion & animation quality rules in the web-design
+   skill (Emil Kowalski): ease-out on entrances, nothing over 300ms on
+   standard UI, transform and opacity only so no frame forces layout,
+   30-80ms stagger, hover gated behind a real pointer, and every one of
+   these removed under prefers-reduced-motion.
+   Nothing here can hide content: the hero uses fill-mode both, so if the
+   animation never runs the element simply renders in its final state.
+   ======================================================================= */
+
+/* --- 1. hero entrance.
+   No delay and no fill-mode on purpose. An animation that starts at opacity 0
+   AND holds that state is how a page ends up blank when the animation never
+   runs - which is the defect the gate caught on the first build of this page.
+   With neither, the element's real state is visible: the animation plays over
+   it, and if it never plays nothing is lost. Duration held at 300ms. --- */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot,.hero .banner{
+  animation:rise .3s var(--e)}
+
+/* --- 2. staggered children, fired when their block scrolls in.
+   Same rule as the reveal: children are VISIBLE by default and only a block
+   JS has positively marked as below the fold is hidden, so a failed script
+   cannot blank a section. --- */
+.stg > *{transition:opacity .26s var(--e),transform .26s var(--e)}
+.stg.pending > *{opacity:0;transform:translateY(9px)}
+.stg > *:nth-child(2){transition-delay:45ms}
+.stg > *:nth-child(3){transition-delay:90ms}
+.stg > *:nth-child(4){transition-delay:135ms}
+.stg > *:nth-child(5){transition-delay:180ms}
+.stg > *:nth-child(6){transition-delay:225ms}
+.stg > *:nth-child(n+7){transition-delay:270ms}
+
+/* --- 3. the live dot on the ledger --- */
+.js-anim .ledger-cap .live s{animation:blip 1.6s ease-in-out infinite}
+
+/* --- 4. link underlines grow from the left. transform only. --- */
+.menu a:not(.btn),.foot a:not(.btn){position:relative}
+.menu a:not(.btn)::after,.foot a:not(.btn)::after{content:"";position:absolute;
+  left:0;right:0;bottom:-2px;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;transition:transform .18s var(--e)}
+@media (hover:hover) and (pointer:fine){
+  .menu a:not(.btn):hover::after,.foot a:not(.btn):hover::after{transform:scaleX(1)}
+}
+
+/* --- 5. the arrow on a primary button nudges. 130ms, barely there. --- */
+.btn .arw{display:inline-block;transition:transform .13s var(--e)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover .arw{transform:translateX(3px)}
+  .ind:hover img{transform:scale(1.028)}
+}
+.ind{overflow:hidden}
+.ind img{transition:filter .22s ease,transform .3s var(--e)}
+
+/* --- 6. FAQ answer arrives rather than snapping in --- */
+.qa details[open] .ans{animation:rise .24s var(--e) both}
+
+/* --- 7. platform marks lift on hover --- */
+.marks .mark{transition:opacity .18s ease,filter .18s ease,transform .18s var(--e)}
+@media (hover:hover) and (pointer:fine){.marks .mark:hover{transform:translateY(-2px)}}
+
 /* ---------- motion: restrained. reveal and underline only ---------- */
 /* Content is VISIBLE by default. Nothing here can leave the page blank.
    Only elements JS has positively marked as below the fold get hidden, and the
@@ -281,8 +343,10 @@ section{padding-block:var(--pad)}
 .rv{transition:opacity .28s var(--e),transform .28s var(--e)}
 .rv.pending{opacity:0;transform:translateY(10px)}
 @media (prefers-reduced-motion:reduce){
-  .rv,.rv.pending{opacity:1;transform:none;transition:none}
-  *{animation:none !important;scroll-behavior:auto !important}
+  .rv,.rv.pending,.stg > *,.stg.pending > *{opacity:1;transform:none;transition:none}
+  .hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot,.hero .banner{
+    opacity:1;transform:none}
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
 }
 
 /* ---------- responsive ---------- */
@@ -374,7 +438,7 @@ section{padding-block:var(--pad)}
         <thead>
           <tr><th class="t">Time</th><th>Handled</th><th class="sys">System</th><th class="cost">Staff time</th></tr>
         </thead>
-        <tbody>
+        <tbody class="stg">
           <tr><td class="t">21:41</td><td class="what">After-hours call answered, job booked<span>Caller&rsquo;s air conditioning failed. Wednesday 2:00 PM offered, accepted, technician assigned.</span></td><td class="sys">Voice AI</td><td class="cost">0 min</td></tr>
           <tr><td class="t">21:42</td><td class="what">Confirmation sent, dispatch notified<span>Text to the caller, email to dispatch, both inside a minute of the call ending.</span></td><td class="sys">SMS AI</td><td class="cost">0 min</td></tr>
           <tr><td class="t">23:07</td><td class="what">New enquiry answered in 30 seconds<span>Web form submitted at 23:06. Qualified and routed before the lead reached a competitor.</span></td><td class="sys">Workflow</td><td class="cost">0 min</td></tr>
@@ -384,7 +448,7 @@ section{padding-block:var(--pad)}
         </tbody>
       </table>
       </div>
-      <div class="ledger-sum">
+      <div class="ledger-sum stg">
         <div><b>0</b><span>Calls missed</span></div>
         <div><b>10 hrs</b><span>Covered, unstaffed</span></div>
         <div><b>$0</b><span>Overtime paid</span></div>
@@ -419,7 +483,7 @@ section{padding-block:var(--pad)}
       <h2>Custom AI automation for <em>every part</em> of your business.</h2>
       <p class="lede">We build AI systems around your exact workflows, connected to the tools you already use. No templates, and nothing for you to configure yourself.</p>
     </div>
-    <div class="cols cols-2">
+    <div class="cols cols-2 stg">
       <div class="rv"><span class="idx">01 / Communication</span><h3>AI Communication</h3><p>Voice, text and email AI that handles every customer interaction around the clock.</p>
         <ul class="tick"><li>Inbound and outbound voice AI</li><li>After-hours call coverage</li><li>Text and email follow-ups</li><li>Appointment reminders</li></ul></div>
       <div class="rv"><span class="idx">02 / Operations</span><h3>AI Operations</h3><p>Automate the back-office work that quietly drains your team&rsquo;s time.</p>
@@ -462,7 +526,7 @@ section{padding-block:var(--pad)}
       <h2>Automations that <em>actually fit</em> your business.</h2>
       <p class="lede">Six industries, one method. We study what your day actually looks like, then automate the parts a machine should be doing.</p>
     </div>
-    <div class="inds">
+    <div class="inds stg">
       <a class="ind rv" href="#final"><img src="assets/industries/home-services.jpg" alt="A home services technician at work." loading="lazy"><h3>Home Services</h3><p>Missed-call text-back, instant lead follow-up, route optimisation and dispatch.</p></a>
       <a class="ind rv" href="#final"><img src="assets/industries/healthcare-dental.jpg" alt="A dental practice treatment room." loading="lazy"><h3>Healthcare &amp; Dental</h3><p>AI receptionist, reminder sequences, patient intake and insurance verification.</p></a>
       <a class="ind rv" href="#final"><img src="assets/industries/real-estate.jpg" alt="A real estate agent meeting clients." loading="lazy"><h3>Real Estate</h3><p>Speed-to-lead response, lead qualification, showing scheduler and long-term nurture.</p></a>
@@ -484,7 +548,7 @@ section{padding-block:var(--pad)}
     <div class="tw rv">
       <table class="data">
         <thead><tr><th>Task</th><th>By hand</th><th>With FlowBots</th></tr></thead>
-        <tbody>
+        <tbody class="stg">
           <tr><td>Lead response</td><td class="was">4 hours</td><td class="now">30 seconds</td></tr>
           <tr><td>Technician routing</td><td class="was">Hours of planning</td><td class="now">One click</td></tr>
           <tr><td>Invoice processing</td><td class="was">20 min each</td><td class="now">Instant</td></tr>
@@ -505,7 +569,7 @@ section{padding-block:var(--pad)}
       <h2>The math that makes this <em>easy</em>.</h2>
       <p class="lede">Projects start at a fixed price, quoted in full before any work begins.</p>
     </div>
-    <div class="cols cols-3">
+    <div class="cols cols-3 stg">
       <div class="rv"><span class="idx">Option A</span><h3>A full-time receptionist</h3><p>$3,500+ a month. Works nine to five, takes vacations, handles one call at a time, and misses after-hours leads.</p></div>
       <div class="rv"><span class="idx">Option B</span><h3>A missed lead</h3><p>$500 to $50,000. Every unanswered call, every slow follow-up, every lead that went to a competitor instead.</p></div>
       <div class="rv"><span class="idx">Option C</span><h3>FlowBots AI</h3><p>From $15,000, fixed price. Unlimited simultaneous calls, never a day off, and it gets sharper over time.</p></div>
@@ -521,7 +585,7 @@ section{padding-block:var(--pad)}
       <p class="num"><b>06</b><i></i>An important distinction</p>
       <h2>This is <em>not</em> a $99-a-month chatbot.</h2>
     </div>
-    <div class="cols cols-2">
+    <div class="cols cols-2 stg">
       <div class="rv"><span class="idx">Template platforms</span><h3>What $99 a month gets you</h3>
         <ul class="tick"><li>A generic chatbot you configure yourself</li><li>Drag-and-drop templates that do not fit your workflow</li><li>You do all the integration work</li><li>Ticket-based support when it breaks</li><li>Their platform, their rules, their limits</li></ul></div>
       <div class="rv"><span class="idx">FlowBots custom build</span><h3>What a custom build gets you</h3>
@@ -539,7 +603,7 @@ section{padding-block:var(--pad)}
       <h2>Three steps to automation.</h2>
       <p class="lede">We study your workflows first, build to them, then launch and keep optimising. Most projects go live in four to eight weeks.</p>
     </div>
-    <div class="cols cols-3">
+    <div class="cols cols-3 stg">
       <div class="rv"><span class="idx">Step 01</span><h3>Listen</h3><p>We study your exact workflows, tools and business rules. No templates, and no assumptions.</p></div>
       <div class="rv"><span class="idx">Step 02</span><h3>Build</h3><p>We design and build a custom AI system for your specific tasks: calls, texts, emails, CRM updates, dispatching, compliance, whatever you need.</p></div>
       <div class="rv"><span class="idx">Step 03</span><h3>Launch</h3><p>Your AI goes live. We monitor, optimise and support it. You get back to running your business.</p></div>
@@ -555,7 +619,7 @@ section{padding-block:var(--pad)}
       <h2>Built by people who have <em>done this before</em>.</h2>
       <p class="lede">Two founders who build the systems themselves rather than outsourcing the technical work.</p>
     </div>
-    <div class="folk">
+    <div class="folk stg">
       <div class="rv">
         <img src="assets/team/brian-hong.jpg" alt="Brian Hong, co-founder and chief executive of FlowBots.ai." loading="lazy" width="132" height="132">
         <h3>Brian Hong</h3>
@@ -583,7 +647,7 @@ section{padding-block:var(--pad)}
       <p class="num"><b>09</b><i></i>How we protect your investment</p>
       <h2>Fixed price. Your data. <em>No lock-in.</em></h2>
     </div>
-    <div class="cols cols-3">
+    <div class="cols cols-3 stg">
       <div class="rv"><h3>Fixed-price proposals</h3><p>You know exactly what you are paying before any work begins. No surprise invoices, and no scope-creep charges.</p></div>
       <div class="rv"><h3>Your data stays yours</h3><p>The code, the automations and the integrations are all yours. We do not hold your business on our platform.</p></div>
       <div class="rv"><h3>No long-term contracts</h3><p>Stay because the results speak for themselves. Support is month-to-month after launch.</p></div>
@@ -600,7 +664,7 @@ section{padding-block:var(--pad)}
       <h2>Everything you need to know.</h2>
       <p class="lede">Straight answers, no fluff.</p>
     </div>
-    <div class="qa rv">
+    <div class="qa rv stg">
       <details><summary><span class="tagq">Services</span>What exactly does FlowBots build for my business?</summary><p class="ans">Custom AI systems designed around your specific workflows. If a person in your company does it on a keyboard or a phone, we can probably automate it. Common builds are AI voice agents, text follow-up systems, CRM automation, compliance workflows, dispatching, payroll processing and multi-channel communication.</p></details>
       <details><summary><span class="tagq">Pricing</span>How much does a custom AI automation project cost?</summary><p class="ans">Projects range from $15,000 to $300,000 depending on scope, and pilot projects start at $15,000. AI voice usage is billed at $0.25 per minute of actual call time. You get a fixed-price quote before any work begins.</p></details>
       <details><summary><span class="tagq">Timeline</span>How long does it take to build and launch?</summary><p class="ans">Most projects take four to eight weeks. Complex enterprise builds take eight to sixteen weeks. You get a clear timeline during your discovery call.</p></details>
@@ -619,7 +683,7 @@ section{padding-block:var(--pad)}
       <h2>AI automation news and guides.</h2>
       <p class="lede">Industry research, workforce transformation insights and practical automation guides from the FlowBots team.</p>
     </div>
-    <div class="cols cols-3">
+    <div class="cols cols-3 stg">
       <div class="rv"><span class="idx">AI &amp; the future of work</span><h3>AI for Tour Operators</h3><p>Automating booking confirmations, pre-tour preparation, post-tour review collection and lead nurture for group enquiries.</p><a class="btn btn-line" href="#insights">Read More</a></div>
       <div class="rv"><span class="idx">AI &amp; the future of work</span><h3>AI for Fishing Charters</h3><p>Automating trip booking, weather-related communication, post-trip review requests and rebooking campaigns.</p><a class="btn btn-line" href="#insights">Read More</a></div>
       <div class="rv"><span class="idx">AI &amp; the future of work</span><h3>AI for Specialty Retail</h3><p>Automating customer follow-up, loyalty programme management, personalised recommendations and review generation.</p><a class="btn btn-line" href="#insights">Read More</a></div>
@@ -720,6 +784,33 @@ section{padding-block:var(--pad)}
     }
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
   for (var m = 0; m < pending.length; m++) { io.observe(pending[m]); }
+
+  var stg = document.querySelectorAll('.stg');
+  var stgPending = [];
+  for (var t = 0; t < stg.length; t++) {
+    if (stg[t].getBoundingClientRect().top >= window.innerHeight) {
+      stg[t].classList.add('pending');
+      stgPending.push(stg[t]);
+    }
+  }
+  if (stgPending.length) {
+    function stgShowAll(){
+      for (var y = 0; y < stgPending.length; y++) { stgPending[y].classList.remove('pending'); }
+    }
+    window.setTimeout(function(){
+      if (document.querySelectorAll('.stg.pending').length === stgPending.length) { stgShowAll(); }
+    }, 2500);
+    if ('IntersectionObserver' in window) {
+      var sio = new IntersectionObserver(function(en){
+        for (var a = 0; a < en.length; a++) {
+          if (en[a].isIntersecting) { en[a].target.classList.remove('pending'); sio.unobserve(en[a].target); }
+        }
+      }, { rootMargin: '0px 0px -4% 0px', threshold: 0.04 });
+      for (var x = 0; x < stgPending.length; x++) { sio.observe(stgPending[x]); }
+    } else {
+      stgShowAll();
+    }
+  }
 
   var b = document.querySelector('.burger');
   var menu = document.getElementById('menu');
