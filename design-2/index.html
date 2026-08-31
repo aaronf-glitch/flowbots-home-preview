@@ -114,22 +114,8 @@ section{padding-block:var(--pad)}
 .hero-foot span{display:flex;align-items:center;gap:8px}
 .hero-foot span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brand-deep)}
 
-/* ---------- hero banner ----------
-   A wide strip under the headline. It is the client's own photograph, already in
-   redesign/assets/scenes, so nothing was sourced for it. Sized and given an
-   explicit width and height so it reserves its space and does not shift the page
-   as it loads. */
-.banner{margin:clamp(38px,4vw,58px) 0 0}
-.banner img{width:100%;height:auto;aspect-ratio:1500/550;object-fit:cover;
-  object-position:center 42%}
-.banner figcaption{margin-top:12px;font-family:var(--mono);font-size:12.5px;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--on-paper-3)}
-@media (max-width:760px){
-  .banner img{aspect-ratio:16/10;object-position:76% 42%}
-}
-
 /* ---------- SIGNATURE: the overnight ledger ---------- */
-.ledger{margin-top:clamp(46px,4.6vw,72px);border-top:2px solid var(--ink)}
+.ledger{margin-top:clamp(52px,5.5vw,86px);border-top:2px solid var(--ink)}
 .ledger-cap{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding:16px 0 18px;
   font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-paper-3)}
 .ledger-cap b{color:var(--on-paper);font-weight:500;letter-spacing:.06em}
@@ -299,7 +285,7 @@ section{padding-block:var(--pad)}
    With neither, the element's real state is visible: the animation plays over
    it, and if it never plays nothing is lost. Duration held at 300ms. --- */
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot,.hero .banner{
+.hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot{
   animation:rise .3s var(--e)}
 
 /* --- 2. staggered children, fired when their block scrolls in.
@@ -353,7 +339,7 @@ section{padding-block:var(--pad)}
 .rv.pending{opacity:0;transform:translateY(10px)}
 @media (prefers-reduced-motion:reduce){
   .rv,.rv.pending,.stg > *,.stg.pending > *{opacity:1;transform:none;transition:none}
-  .hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot,.hero .banner{
+  .hero .kicker,.hero h1,.hero .lede,.hero .cta-row,.hero .hero-foot{
     opacity:1;transform:none}
   *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
 }
@@ -429,10 +415,6 @@ section{padding-block:var(--pad)}
     </div>
     <p class="hero-foot rv"><span>HIPAA compliant</span><span>SOC 2 certified</span><span>Fixed-price proposals</span><span>Live in 4&ndash;8 weeks</span></p>
 
-    <figure class="banner rv">
-      <img src="assets/scenes/call-agents.jpg" alt="Agents wearing headsets taking customer calls in a daylit office." width="1500" height="550" fetchpriority="high" decoding="async">
-      <figcaption>The calls your team takes by hand are the ones we automate first</figcaption>
-    </figure>
 
     <!-- SIGNATURE: the overnight ledger -->
     <div class="ledger rv">
